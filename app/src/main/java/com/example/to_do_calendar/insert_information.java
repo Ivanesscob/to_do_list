@@ -1,30 +1,44 @@
 package com.example.to_do_calendar;
 
+import com.example.to_do_calendar.databinding.ActivityInsertInformationBinding;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+
 
 import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import java.io.File;
+import java.io.IOException;
+
 
 public class insert_information extends AppCompatActivity {
-
+    File file = new File("file.txt");
+    private ActivityInsertInformationBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityInsertInformationBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_insert_information);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        setContentView(binding.getRoot());
+
+        if (!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        binding.backButton.setOnClickListener(v -> {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            finish();
         });
+        binding.acceptButton.setOnClickListener(v -> {
 
+        });
     }
-    Button back_button = findViewById(R.id.back_button);
-    Button accept_button = findViewById(R.id.accept_button);
-
-
 }

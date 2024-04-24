@@ -61,12 +61,14 @@
 
     <EditText
         android:id="@+id/desc_field"
-        android:layout_width="229dp"
-        android:layout_height="100dp"
+        android:layout_width="224dp"
+        android:layout_height="109dp"
         android:backgroundTint="@color/blue_button_stroke"
+        android:ellipsize="end"
         android:ems="10"
         android:hint="Description"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:maxLines="10"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
